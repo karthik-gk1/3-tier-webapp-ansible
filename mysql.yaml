@@ -1,0 +1,36 @@
+- name: configure mysql server
+  hosts: mysql
+  become: yes
+  tasks:
+
+  - name: install mysql libraries
+    ansible.builtin.pip:
+    name: PyMySQL
+    executable: pip3.9
+    state: installed
+
+  - name: mysql install
+    ansible.builtin.package:
+    name: mysql-server
+    state: installed
+  
+  - name: start & enable mysql server
+    ansible.builtin.service:
+      name: mysql
+      state: started
+      enabled: yes
+  
+  - name : connect to mysql server
+    community.mysql.mysqlinfo:
+      login_user: root
+      login_password: Webapp@1
+      login_host: 
+    register: mysql_info
+  
+  - name: print output
+    ansible.builtin.debug:
+      msg: "mysql info: {{mysql_info}}"
+  
+
+
+
