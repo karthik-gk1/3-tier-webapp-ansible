@@ -1,6 +1,9 @@
 - name: configure mysql server
   hosts: mysql
   become: yes
+  vars:
+      mysql_root_password: WebApp@1
+      login_host: 172.31.90.14
   tasks:
   - name: install mysql libraries
     ansible.builtin.pip:
@@ -24,8 +27,8 @@
   - name : connect to mysql server
     community.mysql.mysql_info:
       login_user: root
-      login_password: "Webapp@1"
-      login_host: "172.31.90.14"
+      login_password: "{{mysql_root_password}}"
+      login_host: "{{login_host}}"
     register: mysql_info
     ignore_errors: false
   
