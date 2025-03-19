@@ -26,7 +26,7 @@
 
   - name: download frontend code
     ansible.builtin.get_url:
-      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      url: # code url
       dest: /tmp/frontend.zip
 
   - name: unzip frontend code
@@ -38,7 +38,7 @@
   - name: copy expense config
     ansible.builtin.copy:
       src: expense.conf
-      dest: /etc/nginx/default.d/expense.conf
+      dest: /etc/nginx/default.d/webapp.conf
 
   - name: restart nginx
     ansible.builtin.service:
